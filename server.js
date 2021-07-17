@@ -17,6 +17,7 @@ mongoose.connect(config.DBHost, options);
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 
+console.log(config.util.getEnv("NODE_ENV"));
 //don't show the log when it is test
 if (config.util.getEnv("NODE_ENV") !== "test") {
   //use morgan to log at command line

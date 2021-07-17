@@ -7,6 +7,9 @@ let chai = require("chai");
 let chaiHttp = require("chai-http");
 let server = require("../server");
 let should = chai.should();
+const expect = chai.expect;
+
+const bookService = require("../services/book");
 
 chai.use(chaiHttp);
 
@@ -155,5 +158,18 @@ describe("Books", () => {
           });
       });
     });
+  });
+});
+
+describe("Book Service", () => {
+  it("should get array of books contain 1 book", () => {
+    const books = bookService.getBooks();
+    expect(books).to.be.a("array");
+    expect(books).to.length(1);
+    expect(books[0]).to.haveOwnProperty("id");
+    expect(books[0]).to.haveOwnProperty("title");
+    expect(books[0].id).to.equal(1);
+    expect(books[0].id).to.greaterThan(0);
+    expect(books[0].id).to.lte(1);
   });
 });
